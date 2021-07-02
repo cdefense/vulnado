@@ -25,5 +25,9 @@ jobs:
           curl https://raw.githubusercontent.com/CloudDefenseAI/cd/master/latest/cd-latest-linux-x64.tar.gz > /tmp/cd-latest-linux-x64.tar.gz
           tar -C /tmp -xzf /tmp/cd-latest-linux-x64.tar.gz
           chmod +x /tmp/cdefense
-      - name: Run Cloud Defense Scan
+      - name: Run DAST Scan
+        run: |
+          curl http://host.docker.internal:1337
+          /tmp/cdefense dast --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --url="http://host.docker.internal:1337" --project-name="foo/foobar"
+      - name: Run Container Scan
         run: /tmp/cdefense container --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --image-name="foo/foobar" --project-name="foo/foobar"
