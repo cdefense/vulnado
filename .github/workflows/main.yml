@@ -16,6 +16,10 @@ jobs:
       - name: List images
         run: |
           docker images
+      - name: Run Application
+        run: |
+          docker-compose up -d
+          docker-compose ps
       - name: Install Cloud Defense
         run: |
           curl https://raw.githubusercontent.com/CloudDefenseAI/cd/master/latest/cd-latest-linux-x64.tar.gz > /tmp/cd-latest-linux-x64.tar.gz
