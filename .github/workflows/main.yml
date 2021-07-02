@@ -27,7 +27,7 @@ jobs:
           chmod +x /tmp/cdefense
       - name: Run DAST Scan
         run: |
-          curl http://host.docker.internal:1337
+          curl http://localhost:1337
           /tmp/cdefense dast --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --url="http://host.docker.internal:1337" --project-name="foo/foobar"
       - name: Run Container Scan
         run: /tmp/cdefense container --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --image-name="foo/foobar" --project-name="foo/foobar"
