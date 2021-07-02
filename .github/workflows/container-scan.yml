@@ -1,4 +1,4 @@
-name: Cloud Defense DockerImageScan
+name: Cloud Defense Docker Image Scan
 on:
   push:
 jobs:
@@ -23,4 +23,4 @@ jobs:
           chmod +x /tmp/cdefense
       - name: Run Container Scan
         run: |
-          /tmp/cdefense container --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --image-name="foo/foobar" --project-name="foo/foobar" -q
+          /tmp/cdefense container --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --image-name="foo/foobar" --project-name="vulnado" -q
