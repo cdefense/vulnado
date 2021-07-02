@@ -12,7 +12,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Build image
         run: |
-          docker buildx build -t foo/foobar -o type=image .
+          docker build -t foo/foobar .
       - name: Inspect builder
         run: |
           echo "Name:      ${{ steps.buildx.outputs.name }}"
