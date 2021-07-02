@@ -1,6 +1,6 @@
 name: Cloud Defense DockerImageScan
 on:
-  push:
+  pull_request:
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -13,13 +13,6 @@ jobs:
       - name: Build image
         run: |
           docker build -t foo/foobar .
-      - name: Inspect builder
-        run: |
-          echo "Name:      ${{ steps.buildx.outputs.name }}"
-          echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
-          echo "Status:    ${{ steps.buildx.outputs.status }}"
-          echo "Flags:     ${{ steps.buildx.outputs.flags }}"
-          echo "Platforms: ${{ steps.buildx.outputs.platforms }}"         
       - name: List images
         run: |
           docker images
