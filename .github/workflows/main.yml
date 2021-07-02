@@ -1,0 +1,25 @@
+name: Cloud Defense DockerImageScan
+ on:
+   pull_request:
+ jobs:
+   docker:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v2
+       - name: Set up Docker Buildx
+         uses: docker/setup-buildx-action@v1
+       - name: Inspect builder
+         run: |
+           echo "Name:      ${{ steps.buildx.outputs.name }}"
+           echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
+           echo "Status:    ${{ steps.buildx.outputs.status }}"
+           echo "Flags:     ${{ steps.buildx.outputs.flags }}"
+           echo "Platforms: ${{ steps.buildx.outputs.platforms }}"         
+       - name: Install Cloud Defense
+         run: |
+           curl https://raw.githubusercontent.com/CloudDefenseAI/cd/master/latest/cd-latest-linux-x64.tar.gz > /tmp/cd-latest-linux-x64.tar.gz
+           tar -C /tmp -xzf /tmp/cd-latest-linux-x64.tar.gz
+           chmod +x /tmp/cdefense
+       - name: Run Cloud Defense Scan
+         run: /tmp/cdefense container --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --image-name${{ steps.buildx.outputs.name }} --project-name=$GITHUB_REPOSITORY
