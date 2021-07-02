@@ -11,7 +11,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Build image
         run: |
-          docker buildx build --platform linux/amd64 .
+          docker buildx build -t foo/foobar -o type=image
       - name: Inspect builder
         run: |
           echo "Name:      ${{ steps.buildx.outputs.name }}"
@@ -25,4 +25,4 @@ jobs:
           tar -C /tmp -xzf /tmp/cd-latest-linux-x64.tar.gz
           chmod +x /tmp/cdefense
       - name: Run Cloud Defense Scan
-        run: /tmp/cdefense container --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --image-name=${{ steps.buildx.outputs.name }} --project-name=$GITHUB_REPOSITORY
+        run: /tmp/cdefense container --api-key=d6d2431d-5c13-b100-7420-4890ce39c191 --image-name="foo/foobar" --project-name="foo/foobar"
